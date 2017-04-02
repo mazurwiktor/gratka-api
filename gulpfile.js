@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
     tsc = require('gulp-typescript'),
-    tslint = require('gulp-tslint'),
     sourcemaps = require('gulp-sourcemaps'),
     del = require('del'),
     tsProject = tsc.createProject('tsconfig.json'),
@@ -8,24 +7,16 @@ var gulp = require('gulp'),
     path = require('path'),
     rename = require('gulp-rename');
 // or requiring in ES5
-var tslint = require("gulp-tslint");
 var merge = require('merge2');
 var shell = require('gulp-shell');
 
-gulp.task('ts-lint', ['clean-ts'], function () {
-    return gulp.src(['./**/*.ts', '!typings/**/*.ts', '!node_modules/**/*.ts']).pipe(tslint({
-    formatter: "prose"
-}))
-.pipe(tslint.report());
-});
 
 /**
  * Compile TypeScript and include references to library and app .d.ts files.
  */
-gulp.task('compile-ts', ['ts-lint'], function () {
-    var tsResult = tsProject.src()
-    .pipe(sourcemaps.init())
-    .pipe(tsc(tsProject));
+gulp.task('compile-ts', function () {
+    var tsResult = tsProject.src().pipe(sourcemaps.init()).pipe(tsProject());
+
     return merge([
         tsResult.dts.pipe(gulp.dest('dist')),
         tsResult.js.pipe(sourcemaps.write('.', {
@@ -70,4 +61,4 @@ gulp.task('pack', ['test'], shell.task([
     ])
 );
 
-gulp.task('default', ['clean-ts', 'ts-lint', 'compile-ts', 'copy-json', 'test']);
+gulp.task('default', ['clean-ts', 'compile-ts', 'copy-json', 'test']);

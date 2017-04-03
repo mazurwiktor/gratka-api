@@ -1,5 +1,13 @@
 # Gratka-api
-    Queries unofficial gratka APIs.
+
+Queries unofficial gratka APIs.
+
+# Instalation
+
+```bash
+    npm install gratka-api
+```
+
 # Usage
 
 Create connection params.

@@ -1,8 +1,12 @@
 {
   "name": "gratka-api",
-  "version": "0.0.1",
-  "author": "",
+  "version": "0.0.2",
+  "author": "Wiktor Mazur <wiktormazur1@gmail.com>",
   "description": "Queries unofficial gratka APIs.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mazurwiktor/gratka-api"
+  },
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {

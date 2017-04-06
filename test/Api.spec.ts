@@ -93,6 +93,12 @@ describe("Gratka", () => {
             });
         });
 
+        ifEnvIsSetIt("Should return list of categories in javascipt tree way", () => {
+            return api.pobierz_kategorie({js_tree: true}).then(res => {
+                expect(res.Dom).to.be.not.undefined;
+            });
+        });
+
         ifEnvIsSetIt("Should return list of fields", () => {
             return api.pobierz_pola().then(res => {
                 expect(res).to.be.not.undefined;
@@ -112,10 +118,13 @@ describe("Gratka", () => {
             });
         });
 
-        ifEnvIsSetIt("Should return add", () => {
+        ifEnvIsSetIt("Should return pobierz_ogloszenie", () => {
             const addId = 71822574;
             const categoryId = 397;
-            return api.pobierz_ogloszenie(addId, categoryId).then(res => {
+            return api.pobierz_ogloszenie({
+                id_ogloszenie: addId,
+                id_kategoria: categoryId
+            }).then(res => {
                 expect(res).to.be.not.undefined;
             });
         });
